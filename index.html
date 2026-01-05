@@ -5,6 +5,7 @@
   <title>Risen-themed Haiku</title>
 </head>
 <body style="background:#0b0f14;color:#fff;text-align:center;font-family:serif;padding:20px;">
+
   <button onclick="rand()" style="padding:10px 16px;font-size:16px;">
     Click me for a Risen-themed haiku
   </button>
@@ -22,10 +23,25 @@
       "https://iili.io/fNfzg2V.png"
     ];
 
+    let bag = [];
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
     function rand() {
-      document.getElementById("img").src =
-        imgs[Math.floor(Math.random() * imgs.length)];
+      // Refill and reshuffle when empty
+      if (bag.length === 0) {
+        bag = shuffle([...imgs]);
+      }
+
+      document.getElementById("img").src = bag.pop();
     }
   </script>
+
 </body>
 </html>
