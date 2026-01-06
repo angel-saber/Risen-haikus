@@ -20,28 +20,7 @@
       "https://iili.io/fNfzdqx.png",
       "https://iili.io/fNfz3gV.png",
       "https://iili.io/fNfz20Q.png",
-      "https://iili.io/fNfzg2V.png"
-    ];
-
-    let bag = [];
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function rand() {
-      // Refill and reshuffle when empty
-      if (bag.length === 0) {
-        bag = shuffle([...imgs]);
-      }
-
-      document.getElementById("img").src = bag.pop();
-    }
-  </script>
-
-</body>
-</html>
+      "https://iili.io/fNfzg2V.png",
+      "https://iili.io/fNp5QHl.png",
+      "https://iili.io/fNp5sS4.png",
+      "https://iili.io/fNp5ilf.png",
