@@ -3,15 +3,70 @@
 <head>
   <meta charset="utf-8">
   <title>Risen-themed Haiku</title>
-</head>
-<body style="background:#0b0f14;color:#fff;text-align:center;font-family:serif;padding:20px;">
 
-  <button onclick="rand()" style="padding:10px 16px;font-size:16px;">
-    Click me for a Risen-themed haiku
+  <style>
+    body {
+      background: #0b0f14;
+      color: #f2f2f2;
+      text-align: center;
+      font-family: serif;
+      padding: 24px;
+    }
+
+    /* Epic button */
+    .ritual-btn {
+      display: inline-block;
+      padding: 12px 22px;
+      font-family: Copperplate, "Copperplate Gothic Light", serif;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f6f0e8;
+      background: linear-gradient(#1e1e1e, #0f0f0f);
+      border: 2px solid #c9a24d;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow:
+        0 0 8px rgba(201,162,77,0.45),
+        inset 0 0 6px rgba(201,162,77,0.25);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .ritual-btn:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 14px rgba(201,162,77,0.8),
+        inset 0 0 8px rgba(201,162,77,0.35);
+    }
+
+    .ritual-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Image fade */
+    #img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 18px;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #img.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="ritual-btn" onclick="rand()">
+    ❖ Invoke the Risen Oaths ❖
   </button>
 
-  <div style="margin-top:16px;">
-    <img id="img" style="max-width:100%;height:auto;">
+  <div>
+    <img id="img" alt="Beneath a cold sky Together we forge our fate Honor in our hearts.">
   </div>
 
   <script>
@@ -28,6 +83,7 @@
     ];
 
     let bag = [];
+    const imgEl = document.getElementById("img");
 
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -42,7 +98,19 @@
         bag = shuffle([...imgs]);
       }
 
-      document.getElementById("img").src = bag.pop();
+      const nextSrc = bag.pop();
+
+      // Fade out
+      imgEl.classList.remove("visible");
+
+      setTimeout(() => {
+        imgEl.src = nextSrc;
+
+        // Fade in once loaded
+        imgEl.onload = () => {
+          imgEl.classList.add("visible");
+        };
+      }, 400);
     }
   </script>
 
